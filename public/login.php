@@ -50,12 +50,12 @@ if(empty($errors)) {
 
     <form action="login.php" method="post">
 
-        Email:<br />
+        Email<br />
         <input type="email" name="email" value="" /><br />
-        Password:<br />
+        Password<br />
         <input type="password" name="password" value="" /><br />
         <br>
-        <input type="submit" name="submit" value="Submit"  />
+        <input type="submit" name="submit" value="Login"  />
 
     </form>
 
