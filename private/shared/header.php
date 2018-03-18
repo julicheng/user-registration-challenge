@@ -12,6 +12,7 @@
     <title>User Registration Challenge <?php echo " - " . $page_title; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo WWW_ROOT . '/styles/styles.css'; ?>"/>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 </head>
 <body>
 
