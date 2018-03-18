@@ -31,21 +31,4 @@ function db_disconnect($connection) {
     }
 }
 
-// // 2. Perform database query
-// $query = "SELECT * FROM subjects";
-// $result_set = mysqli_query($connection, $query);
-
-// // Test if query succeeded
-// if (!$result_set) {
-// 	exit("Database query failed.");
-// }
-
-// // 3. Use returned data (if any)
-// while($subject = mysqli_fetch_assoc($result_set)) {
-//   echo $subject["menu_name"] . "<br />";
-// }
-
-// // 4. Release returned data
-// mysqli_free_result($result_set);
-
 ?>
