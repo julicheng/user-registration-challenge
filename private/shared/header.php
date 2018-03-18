@@ -15,12 +15,16 @@
 </head>
 <body>
 
-<header>
+    <header>
         <h1>User Registration Challenge <?php echo " - " . $page_title; ?></h1>
     </header>
 
     <navigation>
         <ul>
-            <li><a href="<?php echo WWW_ROOT . '/index.php'; ?>">Menu</a></li>
+            <li><a href="<?php echo WWW_ROOT . '/login.php'; ?>">Login</a></li>
+            <li><a href="<?php echo WWW_ROOT . '/register.php'; ?>">Register</a></li>
+            <?php if(isset($_SESSION['first_name'])) { ?>
+                <li><a href="<?php echo WWW_ROOT . '/logout.php'; ?>">Logout</a></li>
+            <?php } ?>
         </ul>
     </navigation>
