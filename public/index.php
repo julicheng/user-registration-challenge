@@ -6,7 +6,7 @@
 
 <div class="content">
 
-    <h2>You have succesfully logged in! Good job  <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?>!</h2>
+    <h2>Welcome Back  <?php echo ucfirst($_SESSION['first_name']) . " " . ucfirst($_SESSION['last_name']); ?>!</h2>
 
     
 </div>
