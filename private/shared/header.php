@@ -22,9 +22,12 @@
 
     <navigation>
         <ul>
+             <?php if(!isset($_SESSION['first_name'])) { ?>
             <li><a href="<?php echo WWW_ROOT . '/login.php'; ?>">Login</a></li>
             <li><a href="<?php echo WWW_ROOT . '/register.php'; ?>">Register</a></li>
+            <?php } ?>
             <?php if(isset($_SESSION['first_name'])) { ?>
+                <li><a href="<?php echo WWW_ROOT . '/profile.php'; ?>">Profile</a></li>
                 <li><a href="<?php echo WWW_ROOT . '/logout.php'; ?>">Logout</a></li>
             <?php } ?>
         </ul>
