@@ -30,16 +30,16 @@ if(is_post_request()) {
 
     <form action="register.php" method="post">
 
-        First Name:<br />
+        First Name<br />
         <input type="text" name="first_name" value="" /><br />
-        Last Name:<br />
+        Last Name<br />
         <input type="text" name="last_name" value="" /><br />
-        Email:<br />
+        Email<br />
         <input type="email" name="email" value="" /><br />
-        Password:<br />
+        Password<br />
         <input type="password" name="password" value="" /><br />
         <br>
-        <input type="submit" name="submit" value="Submit"  />
+        <input type="submit" name="submit" value="Register"  />
 
     </form>
 
