@@ -48,7 +48,7 @@ function validate_user($user) {
     } elseif(!has_length($user['email'], ['min' => 2, 'max' => 255])) {
         $errors[] = "Email must be between 2 to 255 characters.";
     } elseif(!has_unique_email($user['email'])) {
-        $errors[] = "Email already taken.";
+        $errors[] = "Email already taken";
     }
 
     // first name
@@ -70,6 +70,13 @@ function validate_user($user) {
         $errors[] = "Password cannot be blank";
     } elseif(!has_length($user['password'], ['min' => 5, 'max' => 255])) {
         $errors[] = "Password must be between 5 to 255 characters.";
+    }
+
+    // confirm password
+    if(is_blank($user['confirm_password'])) {
+        $errors[] = "Confirm password cannot be blank";
+    } elseif($user['password'] !== $user['confirm_password']) {
+        $errors[] = "Passwords do not match";
     }
 
     return $errors;
