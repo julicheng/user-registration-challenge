@@ -11,12 +11,13 @@ function insert_user($user) {
     $hashed_password = password_hash($user['password'], PASSWORD_BCRYPT);
 
     $sql = "INSERT INTO users ";
-    $sql.= "(first_name, last_name, email, hashed_password) ";
+    $sql.= "(first_name, last_name, email, hashed_password, profile_img) ";
     $sql.= "VALUES (";
     $sql.= "'" . $user['first_name'] . "', ";
     $sql.= "'" . $user['last_name'] . "', ";
     $sql.= "'" . $user['email'] . "', ";
-    $sql.= "'" . $hashed_password . "'";
+    $sql.= "'" . $hashed_password . "', ";
+    $sql.= "'noimage.jpg'";
     $sql.= ")";
 
     $result = mysqli_query($db, $sql);
@@ -65,6 +66,12 @@ function update_user($user) {
         $email_update = true;
     }
 
+    if($user['profile_img'] === "") {
+        $profile_update = false;
+    } else {
+        $profile_update = true;
+    }
+
     $errors = validate_user($user, $password_update, $email_update);
     if(!empty($errors)) {
         return $errors; 
@@ -74,6 +81,9 @@ function update_user($user) {
 
     $sql = "UPDATE users SET ";
     $sql.= "first_name='" . $user['first_name'] . "', "; 
+    if($profile_update) {
+        $sql.= "profile_img='" . $user['profile_img'] . "', ";
+    }
     if($password_update) {
         $sql.= "password='" . $hashed_password . "', ";
     }
@@ -83,9 +93,9 @@ function update_user($user) {
     $sql.= "last_name='" . $user['last_name'] . "' ";
     $sql.= "WHERE id='" . $user['id'] . "' "; 
     $sql.= "LIMIT 1";
-
+    
     $result = mysqli_query($db, $sql);
-
+    
     if($result) {
         return true;
     };

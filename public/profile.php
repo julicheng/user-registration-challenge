@@ -22,9 +22,39 @@ if(is_post_request()) {
     $user['email'] = isset($_POST['email']) ? $_POST['email'] : "";
     $user['password'] = isset($_POST['password']) ? $_POST['password'] : "";
     $user['confirm_password'] = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : "";
+    $user['profile_img'] = "";
+
+    if($_FILES['profile_img']['size'] !== 0) {        
+        $file = $_FILES['profile_img'];
+
+        $fileName = $file['name'];
+        $fileTmpName = $file['tmp_name'];
+        $fileSize = $file['size'];
+        $fileError = $file['error'];
+        
+        $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+        if($fileExt === "jpg" || $fileExt === "png" || $fileExt === "jpeg") {
+            if($fileSize < 50000) {
+                if($fileError === 0) {
+                    $fileNameNew = time() . "." . $fileExt;
+                    $fileDestination = 'images/' . $fileNameNew;
+                    move_uploaded_file($fileTmpName, $fileDestination);
+                    $user['profile_img'] = $fileNameNew;
+                } else {
+                    $errors[] = "There was an error uploading the file";
+                }
+            } else {
+                $errors[] = "Image size is too large";
+            }
+        } else { 
+            $errors[] = "Image type is not valid";
+        }
+    }
 
     $result = update_user($user);
     if ($result === true) {
+         $_SESSION['message'] = 'Your profile has updated successfully.';
         redirect_to(url_for('/profile.php?id=' . $_SESSION['id']));
     } else {
         $user = find_user_by_id($id);
@@ -40,7 +70,7 @@ if(is_post_request()) {
 <div class="content">
 <div class="profile-section">
     <div class="profile-image">
-        <img src="<?php echo url_for('/images/noimage.jpg') ?>">
+        <img src="<?php echo url_for('/images/' . $user['profile_img']); ?>">
     </div>
     <div class="profile">
         <a href="<?php echo url_for('/index.php'); ?>">Go Back</a>
