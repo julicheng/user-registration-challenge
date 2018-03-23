@@ -52,3 +52,10 @@ img {
   margin-bottom: 15px;;
 }
 
+@media screen and (max-width: 700px) {
+  .profile-image {
+    float: none;
+    margin: 20px auto;
+  }
+}
+
