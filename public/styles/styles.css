@@ -12,7 +12,7 @@ ul {
 body {
   text-align: center;
   font-family: Comfortaa;
-  width: 40%;
+  width: 50%;
   margin: auto;
 }
 
@@ -46,5 +46,9 @@ h4 span {
 
 img {
   width:100%;
+}
+
+#message {
+  margin-bottom: 15px;;
 }
 
