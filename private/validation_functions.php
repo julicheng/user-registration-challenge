@@ -45,4 +45,31 @@ function has_length($value, $options) {
     }
   }
 
+function validate_file($file) {
+  $errors = [];
+  $fileName = $file['name'];
+  $fileTmpName = $file['tmp_name'];
+  $fileSize = $file['size'];
+  $fileError = $file['error'];
+  
+  $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+  if($fileExt === "jpg" || $fileExt === "png" || $fileExt === "jpeg") {
+      if($fileSize < 50000) {
+          if($fileError === 0) {
+              $fileNameNew = time() . "." . $fileExt;
+              $fileDestination = 'images/' . $fileNameNew;
+              move_uploaded_file($fileTmpName, $fileDestination);
+              return $fileNameNew;
+          } else {
+              $errors[] = "There was an error uploading the file";
+          }
+      } else {
+          $errors[] = "Image size is too large";
+      }
+  } else { 
+      $errors[] = "Image type is not valid";
+  }
+  return $errors;
+}
 ?>
