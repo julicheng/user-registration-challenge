@@ -51,9 +51,9 @@ if(empty($errors)) {
     <form action="login.php" method="post">
 
         Email<br />
-        <input type="email" name="email" value="" /><br />
+        <input type="email" name="email" value="" /><br /><br />
         Password<br />
-        <input type="password" name="password" value="" /><br />
+        <input type="password" name="password" value="" /><br /><br />
         <br>
         <input type="submit" name="submit" value="Login"  />
 
