@@ -7,6 +7,7 @@
 <?php 
 
 $errors = [];
+$file_errors = [];
 
 if(!isset($_GET['id'])) {
     redirect_to(url_for('/index.php'));
@@ -26,33 +27,39 @@ if(is_post_request()) {
 
     if($_FILES['profile_img']['size'] !== 0) {        
         $file = $_FILES['profile_img'];
-
-        $fileName = $file['name'];
-        $fileTmpName = $file['tmp_name'];
-        $fileSize = $file['size'];
-        $fileError = $file['error'];
-        
-        $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
-        if($fileExt === "jpg" || $fileExt === "png" || $fileExt === "jpeg") {
-            if($fileSize < 50000) {
-                if($fileError === 0) {
-                    $fileNameNew = time() . "." . $fileExt;
-                    $fileDestination = 'images/' . $fileNameNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
-                    $user['profile_img'] = $fileNameNew;
-                } else {
-                    $errors[] = "There was an error uploading the file";
-                }
-            } else {
-                $errors[] = "Image size is too large";
-            }
-        } else { 
-            $errors[] = "Image type is not valid";
+        $file_result = validate_file($file);
+        if (is_array($file_result) == true) {
+            $file_errors = $file_result;
+        } else {
+            $user['profile_img'] = $file_result;
         }
+
+        // $fileName = $file['name'];
+        // $fileTmpName = $file['tmp_name'];
+        // $fileSize = $file['size'];
+        // $fileError = $file['error'];
+        
+        // $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+        // if($fileExt === "jpg" || $fileExt === "png" || $fileExt === "jpeg") {
+        //     if($fileSize < 50000) {
+        //         if($fileError === 0) {
+        //             $fileNameNew = time() . "." . $fileExt;
+        //             $fileDestination = 'images/' . $fileNameNew;
+        //             move_uploaded_file($fileTmpName, $fileDestination);
+        //             $user['profile_img'] = $fileNameNew;
+        //         } else {
+        //             $errors[] = "There was an error uploading the file";
+        //         }
+        //     } else {
+        //         $errors[] = "Image size is too large";
+        //     }
+        // } else { 
+        //     $errors[] = "Image type is not valid";
+        // }
     }
 
-    $result = update_user($user);
+    $result = update_user($user, $file_errors);
     if ($result === true) {
          $_SESSION['message'] = 'Your profile has updated successfully.';
         redirect_to(url_for('/profile.php?id=' . $_SESSION['id']));
