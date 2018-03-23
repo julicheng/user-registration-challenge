@@ -38,21 +38,24 @@ if(is_post_request()) {
 ?>
 
 <div class="content">
-
+<div class="profile-section">
+    <div class="profile-image">
+        <img src="<?php echo url_for('/images/noimage.jpg') ?>">
+    </div>
     <div class="profile">
         <h1>Your Profile</h1>
         <h4>First Name: <span><?php echo ucfirst($user['first_name']); ?></span></h4> 
         <h4>Last Name: <span><?php echo ucfirst($user['last_name']); ?></span></h4>
         <h4>Email: <span><?php echo $user['email']; ?></span></h4>
     </div>
-
+</div>
     <hr>
 
     <div class="profile-errors">
         <?php echo display_errors($errors); ?>
     </div>
 
-    <form action="<?php echo 'profile.php?id=' . $user['id']; ?>" method="post" class="form_update">
+    <form action="<?php echo 'profile.php?id=' . $user['id']; ?>" method="post" class="form_update" enctype="multipart/form-data">
 
         First Name:
         <input type="text" name="first_name" value="<?php echo ucfirst($user['first_name']); ?>" /><br /><br />
@@ -64,6 +67,8 @@ if(is_post_request()) {
         <input type="password" name="password" value="" /><br /><br />
         Confirm Password:
         <input type="password" name="confirm_password" value="" /><br /><br />
+        Profile Picture Upload:
+        <input type="file" name="profile_img"/><br /><br />
         <input type="submit" name="submit" value="Update"  />
 
     </form>
