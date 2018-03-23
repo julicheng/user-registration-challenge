@@ -16,6 +16,7 @@ if(is_post_request()) {
 
     $result = insert_user($user);
     if($result === true) {
+         $_SESSION['message'] = 'Your account was created successfully. Please Log in.';
         redirect_to(url_for('/login.php'));
     } else {
         $errors = $result;

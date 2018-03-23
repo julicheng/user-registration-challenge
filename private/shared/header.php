@@ -32,3 +32,5 @@
             <?php } ?>
         </ul>
     </navigation>
+
+     <?php echo display_session_message(); ?>
