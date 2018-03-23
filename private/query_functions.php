@@ -39,6 +39,19 @@ function find_user_by_email($email) {
     return $user;
 }
 
+function find_user_by_id($id) {
+    global $db;
+
+    $sql = "SELECT * FROM users ";
+    $sql.= "WHERE id='" . $id . "'";
+
+    $result = mysqli_query($db, $sql);
+    
+    $user = mysqli_fetch_assoc($result);
+    mysqli_free_result($result); 
+    return $user;
+}
+
 function validate_user($user) {
     $errors = [];
 
