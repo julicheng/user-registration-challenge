@@ -6,13 +6,45 @@ ul {
   padding: 0;
   margin: 0;
   padding-bottom: 20px;
+  list-style-position:inside;
 }
 
 body {
   text-align: center;
   font-family: Comfortaa;
+  width: 40%;
+  margin: auto;
 }
 
 input {
   margin: 3px;
 }
+
+h4 span {
+  font-weight: initial;
+}
+
+.profile {
+  text-align: left;
+}
+
+.form_update {
+  text-align: left;
+  font-weight: bold;
+}
+
+.profile-errors {
+  text-align: left;
+}
+
+.profile-image {
+  background: black;
+  width: 150px;
+  height: 150px;
+  float: right;
+}
+
+img {
+  width:100%;
+}
+
