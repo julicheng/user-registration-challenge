@@ -53,7 +53,7 @@ function find_user_by_id($id) {
     return $user;
 }
 
-function update_user($user) {
+function update_user($user, $file_errors) {
     global $db;
 
     $password_update = !is_blank($user['password']);
@@ -72,7 +72,7 @@ function update_user($user) {
         $profile_update = true;
     }
 
-    $errors = validate_user($user, $password_update, $email_update);
+    $errors = validate_user($user, $password_update, $email_update, $file_errors);
     if(!empty($errors)) {
         return $errors; 
     }
@@ -93,7 +93,7 @@ function update_user($user) {
     $sql.= "last_name='" . $user['last_name'] . "' ";
     $sql.= "WHERE id='" . $user['id'] . "' "; 
     $sql.= "LIMIT 1";
-    
+
     $result = mysqli_query($db, $sql);
     
     if($result) {
@@ -101,8 +101,8 @@ function update_user($user) {
     };
 }
 
-function validate_user($user, $password_update = true, $email_update = true) {
-    $errors = [];
+function validate_user($user, $password_update = true, $email_update = true, $file_errors) {
+    $errors = $file_errors;
 
     // first name
     if(is_blank($user['first_name'])) {
