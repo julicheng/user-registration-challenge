@@ -85,7 +85,7 @@ function update_user($user, $file_errors) {
         $sql.= "profile_img='" . $user['profile_img'] . "', ";
     }
     if($password_update) {
-        $sql.= "password='" . $hashed_password . "', ";
+        $sql.= "hashed_password='" . $hashed_password . "', ";
     }
     if($email_update) {
         $sql.= "email='" . $user['email'] . "', ";
@@ -93,7 +93,6 @@ function update_user($user, $file_errors) {
     $sql.= "last_name='" . $user['last_name'] . "' ";
     $sql.= "WHERE id='" . $user['id'] . "' "; 
     $sql.= "LIMIT 1";
-
     $result = mysqli_query($db, $sql);
     
     if($result) {
