@@ -56,7 +56,6 @@ if(is_post_request()) {
         <img src="<?php echo url_for('/images/' . $user['profile_img']); ?>">
     </div>
     <div class="profile">
-        <a href="<?php echo url_for('/index.php'); ?>">Go Back</a>
         <h1>Your Profile</h1>
         <h4>First Name: <span><?php echo ucfirst($user['first_name']); ?></span></h4> 
         <h4>Last Name: <span><?php echo ucfirst($user['last_name']); ?></span></h4>
