@@ -102,7 +102,7 @@ function update_user($user, $file_errors) {
     };
 }
 
-function validate_user($user, $password_update = true, $email_update = true, $file_errors) {
+function validate_user($user, $password_update = true, $email_update = true, $file_errors = []) {
     $errors = $file_errors;
 
     // first name
