@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 23, 2018 at 11:31 PM
+-- Generation Time: Apr 09, 2018 at 02:35 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -21,6 +21,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `user_registration_challenge`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notes`
+--
+
+DROP TABLE IF EXISTS `notes`;
+CREATE TABLE IF NOT EXISTS `notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` text,
+  PRIMARY KEY (`id`),
+  KEY `fk_user_id` (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notes`
+--
+
+INSERT INTO `notes` (`id`, `user_id`, `title`, `content`) VALUES
+(2, 13, 'Test', 'Testing'),
+(6, 13, 'Hello', 'hellooooooooooooooooooooooooooooooo'),
+(4, 14, 'Test1', 'Testing'),
+(5, 14, 'Test', 'Testing'),
+(8, 13, 'Groceries', 'helloooooooooooooooooooooooooooooo'),
+(9, 14, 'jkdhslf', 'jkfl;sjf;dsfjsfdsfdsf');
 
 -- --------------------------------------------------------
 
@@ -44,10 +72,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `hashed_password`, `profile_img`) VALUES
-(13, 'Juli', 'Cheng', 'hellojuli@gmail.com', '$2y$10$9uYZ8nCDzDJSItO/vwh1QOfx2Meu59PsFzgzxeSh3xYHzVOUi1v/W', 'noimage.jpg'),
-(14, 'John', 'Smith', 'hellojohn@gmail.com', '$2y$10$m7xWKV20SBqym680ImxOB.izgD0.zFbO1QUlVwRP89GSJ4Ml2Ccya', 'noimage.jpg'),
-(15, 'Testing', 'Testing', 'testing@gmail.com', '$2y$10$py.vgDwVYEYU3SiHIqgL.eNnBLDlvNFycYuN1OdfO30mLaV2S0TFy', 'noimage.jpg'),
-(16, 'Blah', 'BBlah', 'blah@gmail.com', '$2y$10$ABVMnwbcSOdjNR9Unh9AxOSCtTGi4Z/wb3/KBKharnua1X2M4A496', 'noimage.jpg');
+(13, 'Juli', 'Cheng', 'hellojuli@gmail.com', '$2y$10$ojfQc7bAtTbvktDzC8lba.KgCqtItBubBah8v/wCwXPmxZCokWX.C', 'noimage.jpg'),
+(14, 'John', 'Smith', 'hellojohn@gmail.com', '$2y$10$m7xWKV20SBqym680ImxOB.izgD0.zFbO1QUlVwRP89GSJ4Ml2Ccya', 'noimage.jpg');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
