@@ -1,5 +1,7 @@
 <?php
 
+// USERS 
+
 function insert_user($user) {
     global $db;
 
@@ -143,6 +145,109 @@ function validate_user($user, $password_update = true, $email_update = true, $fi
         } elseif($user['password'] !== $user['confirm_password']) {
             $errors[] = "Passwords do not match";
         }
+    }
+
+    return $errors;
+}
+
+// NOTES
+
+function insert_note($note) {
+    global $db;
+
+    $errors = validate_note($note);
+    if(!empty($errors)) {
+        return $errors;
+    }
+
+    $sql = "INSERT INTO notes ";
+    $sql.= "(user_id, title, content) ";
+    $sql.= "VALUES (";
+    $sql.= "'" . $note['user_id'] . "',";
+    $sql.= "'" . $note['title'] . "',";
+    $sql.= "'" . $note['content'] . "'";
+    $sql.= ")";
+    
+    $result = mysqli_query($db, $sql);
+
+    if($result) {
+        return true;
+    }
+}
+
+function find_note_by_id($id) {
+    global $db;
+
+    $sql = "SELECT * FROM notes ";
+    $sql.= "WHERE id='" . $id . "' ";
+
+    $result = mysqli_query($db, $sql);
+
+    $note = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return $note;
+}
+
+function find_notes_by_user_id($user_id) {
+    global $db;
+
+    $sql = "SELECT * FROM notes ";
+    $sql.= "WHERE user_id='" . $user_id . "' ";
+    $sql.= "ORDER BY id DESC";
+    $result = mysqli_query($db, $sql);
+    
+    return $result;
+}
+
+function update_note($note) {
+    global $db;
+
+    $errors = validate_note($note);
+    if(!empty($errors)) {
+        return $errors;
+    }
+
+    $sql = "UPDATE notes SET ";
+    $sql.= "title='" . $note['title'] . "', ";
+    $sql.= "content='" . $note['content'] . "' ";
+    $sql.= "WHERE id='" . $note['id'] . "' ";
+    $sql.= "LIMIT 1";
+
+    $result = mysqli_query($db, $sql);
+
+    if($result) {
+        return true;
+    }
+}
+
+function delete_note($id) {
+    global $db;
+
+    $sql = "DELETE FROM notes ";
+    $sql.= "WHERE id='" . $id . "' ";
+    $sql.= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    
+    if($result) {
+        return true;
+    }
+}
+
+function validate_note($note) {
+    $errors = [];
+
+    // title
+    if(is_blank($note['title'])) {
+        $errors[] = "Title cannot be blank";
+    } elseif(!has_length($note['title'], ['min' => 2, 'max' => 255])) {
+        $errors[] = "Title must be between 2 to 255 characters.";
+    }
+
+    // content
+    if(is_blank($note['content'])) {
+        $errors[] = "Content cannot be blank";
+    } elseif(!has_length($note['content'], ['min' => 15])) {
+        $errors[] = "Content must be at least 15 characters.";
     }
 
     return $errors;
