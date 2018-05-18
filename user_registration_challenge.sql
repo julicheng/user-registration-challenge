@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 09, 2018 at 02:35 PM
+-- Generation Time: May 18, 2018 at 07:20 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `hashed_password` varchar(255) DEFAULT NULL,
   `profile_img` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -73,7 +73,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `hashed_password`, `profile_img`) VALUES
 (13, 'Juli', 'Cheng', 'hellojuli@gmail.com', '$2y$10$ojfQc7bAtTbvktDzC8lba.KgCqtItBubBah8v/wCwXPmxZCokWX.C', 'noimage.jpg'),
-(14, 'John', 'Smith', 'hellojohn@gmail.com', '$2y$10$m7xWKV20SBqym680ImxOB.izgD0.zFbO1QUlVwRP89GSJ4Ml2Ccya', 'noimage.jpg');
+(14, 'John', 'Smith', 'hellojohn@gmail.com', '$2y$10$m7xWKV20SBqym680ImxOB.izgD0.zFbO1QUlVwRP89GSJ4Ml2Ccya', 'noimage.jpg'),
+(20, 'Test', 'Test', 'hello@gmail.com', '$2y$10$UjRzAmjMBpYJUkpNkxC65egyHtqPknfwxlilmYBvikvg75.tFUoSS', 'noimage.jpg'),
+(18, 'Blah', 'blah', 'helloblah@gmail.com', '$2y$10$Bm4V0PP21HxIQCkFOxZwn.3WFF/p/sZOeq.VA51A6H8qA4xqkryfy', 'noimage.jpg'),
+(19, 'Juli', 'Cheng', 'blah@gmail.com', '$2y$10$w/WtI2p7mEBuIbeVkIJSkuR/p.GTWBY2h7eI4mqZOtg25lXheApQC', 'noimage.jpg');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
